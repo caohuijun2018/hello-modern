@@ -1,4 +1,7 @@
 import React from 'react';
+import { List } from 'antd';
+import LaddaButton, { S, SLIDE_UP } from 'react-ladda';
+import 'ladda/dist/ladda.min.css';
 
 const getAvatar = (users: Array<{ name: string; email: string }>) =>
   users.map(user => ({
@@ -15,15 +18,42 @@ const mockData = getAvatar([
 
 function App() {
   return (
-    <ul>
-      {mockData.map(({ name, avatar, email }) => (
-        <li key={name}>
-          <img src={avatar} width={60} height={60} /> ---
-          <span>{name}</span> ---
-          <span>{email}</span>
-        </li>
-      ))}
-    </ul>
+    // <ul>
+    //   {mockData.map(({ name, avatar, email }) => (
+    //     <li key={name}>
+    //       <img src={avatar} width={60} height={60} /> ---
+    //       <span>{name}</span> ---
+    //       <span>{email}</span>
+    //     </li>
+    //   ))}
+    // </ul>
+    <>
+      <List
+        dataSource={mockData}
+        renderItem={({ name, email, avatar }) => (
+          <List.Item
+            key={name}
+            actions={[
+              <LaddaButton
+                key={email}
+                loading={false}
+                data-size={S}
+                data-style={SLIDE_UP}
+                data-spinner-size={20}
+                data-spinner-color="#ddd"
+                data-spinner-lines={8}>
+                Call
+              </LaddaButton>,
+            ]}>
+            <List.Item.Meta
+              avatar={<img alt="avatar" src={avatar} width={60} height={60} />}
+              title={name}
+              description={email}
+            />
+          </List.Item>
+        )}
+      />
+    </>
   );
 }
 
