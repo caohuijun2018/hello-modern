@@ -2,6 +2,7 @@ import React from 'react';
 import { List } from 'antd';
 import LaddaButton, { S, SLIDE_UP } from 'react-ladda';
 import 'ladda/dist/ladda.min.css';
+import Avatar from './components/Avatar';
 
 const getAvatar = (users: Array<{ name: string; email: string }>) =>
   users.map(user => ({
@@ -46,7 +47,7 @@ function App() {
               </LaddaButton>,
             ]}>
             <List.Item.Meta
-              avatar={<img alt="avatar" src={avatar} width={60} height={60} />}
+              avatar={<Avatar alt="avatar" src={avatar} />}
               title={name}
               description={email}
             />
